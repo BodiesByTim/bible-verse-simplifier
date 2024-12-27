@@ -3,27 +3,121 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bible Verse Simplifier</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>Bible Verse Finder</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      text-align: center;
+      padding-top: 50px;
+    }
+
+    input, button {
+      padding: 10px;
+      margin: 10px;
+      font-size: 16px;
+    }
+
+    #verse-output {
+      margin-top: 20px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #verse-output p {
+      font-size: 18px;
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Bible Verse Simplifier</h1>
-    <p class="subtitle">Ever wondered what that verse really means? We got you!</p>
-    
-    <input type="text" id="verse-input" placeholder="Enter Bible Verse (e.g., John 3:16)" />
-    <button id="fetch-verse">Get Explanation</button>
-    
-    <div id="verse-output" class="output">
-      <p><strong>Verse:</strong> <span id="verse-text">...</span></p>
-      <p><strong>Explanation:</strong> <span id="verse-explanation">...</span></p>
-      <p><strong>Action Step:</strong> <span id="action-step">...</span></p>
-    </div>
-    
-    
-    <p class="footer">Powered by BodiesByTim</p>
+
+  <h1>Bible Verse Finder</h1>
+  <p>Enter a Bible verse reference (e.g., John 3:16) to get its meaning and action step!</p>
+
+  <input type="text" id="verse-input" placeholder="Enter Bible verse (e.g., John 3:16)">
+  <button id="fetch-verse">Fetch Verse</button>
+
+  <div id="verse-output" style="display:none;">
+    <p><strong>Verse:</strong> <span id="verse-text"></span></p>
+    <p><strong>Explanation:</strong> <span id="verse-explanation"></span></p>
+    <p><strong>Action Step:</strong> <span id="action-step"></span></p>
   </div>
 
-  <script src="script.js"></script>
+  <script>
+    // Simulated Bible Data (Example)
+    const bibleData = {
+      "John 3:16": {
+        verse: "For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life.",
+        explanation: "This verse talks about the unconditional love God has for us and His sacrifice of sending Jesus to save us. It's the foundation of Christian faith.",
+        actionStep: "Take a moment today to reflect on God's love for you. Maybe share this with someone who needs to hear it, or just remember: you're loved."
+      },
+      "Philippians 4:13": {
+        verse: "I can do all this through him who gives me strength.",
+        explanation: "This verse is a reminder that no matter what challenges you're facing, with Christ's strength, anything is possible.",
+        actionStep: "When you're feeling weak, remember to lean on Christ. Take on a challenge today, no matter how small, with the mindset that you're not alone."
+      },
+      "Romans 8:28": {
+        verse: "And we know that in all things God works for the good of those who love him, who have been called according to his purpose.",
+        explanation: "This verse reassures us that, even when things go wrong, God is still working behind the scenes for our good and His purpose.",
+        actionStep: "Reflect on a recent challenge. How can you see God's purpose working through it? Trust that even tough times are part of His plan."
+      },
+      "Jeremiah 29:11": {
+        verse: "For I know the plans I have for you, declares the Lord, plans for welfare and not for evil, to give you a future and a hope.",
+        explanation: "This verse is about God's promise to give us a future full of hope. Even when we don’t understand, His plans are always good.",
+        actionStep: "When you feel uncertain about the future, remember that God has a good plan for you. Take a step of faith toward your goals today."
+      },
+      "Isaiah 41:10": {
+        verse: "So do not fear, for I am with you; do not be dismayed, for I am your God. I will strengthen you and help you; I will uphold you with my righteous right hand.",
+        explanation: "God’s promise of strength and presence is a comfort during difficult times. He is always with us to support and uphold us.",
+        actionStep: "When you feel overwhelmed, remind yourself of God's presence. Speak this verse aloud and trust that He will give you strength."
+      },
+      "Matthew 6:33": {
+        verse: "But seek first his kingdom and his righteousness, and all these things will be given to you as well.",
+        explanation: "This verse emphasizes the importance of prioritizing God in our lives. When we focus on Him, everything else falls into place.",
+        actionStep: "Today, focus on putting God first in your actions. Seek His guidance and trust that He will provide for your needs."
+      },
+      "Proverbs 3:5-6": {
+        verse: "Trust in the Lord with all your heart and lean not on your own understanding; in all your ways submit to him, and he will make your paths straight.",
+        explanation: "This verse encourages us to trust God's plan even when we don’t understand everything. His wisdom leads us in the right direction.",
+        actionStep: "When faced with a decision, pray and trust God’s guidance. Surrender your own understanding and let Him direct your path."
+      }
+    };
+
+    // Event listener for fetching verse and explanation
+    document.getElementById("fetch-verse").addEventListener("click", function() {
+      const verseInput = document.getElementById("verse-input").value.trim();
+      const outputDiv = document.getElementById("verse-output");
+
+      if (verseInput === "") {
+        alert("Please enter a Bible verse (e.g., John 3:16).");
+        return;
+      }
+
+      // Fetch the verse data from the simulated Bible data
+      const verseData = bibleData[verseInput];
+
+      if (verseData) {
+        // Update the output fields with the verse, explanation, and action step
+        document.getElementById("verse-text").textContent = verseData.verse;
+        document.getElementById("verse-explanation").textContent = verseData.explanation;
+        document.getElementById("action-step").textContent = verseData.actionStep;
+        
+        // Show the output
+        outputDiv.style.display = 'block';
+      } else {
+        // If the verse is not found in the data, display an error message
+        outputDiv.innerHTML = "<p>Sorry, that verse is not in our database. Try another one!</p>";
+        outputDiv.style.display = 'block'; // Ensure it's visible when the error is shown
+      }
+    });
+  </script>
+
 </body>
 </html>
