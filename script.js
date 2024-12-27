@@ -120,10 +120,8 @@ const bibleData = {
         explanation: "This verse encourages us to trust God's plan even when we don’t understand everything. His wisdom leads us in the right direction.",
         actionStep: "When faced with a decision, pray and trust God’s guidance. Surrender your own understanding and let Him direct your path."
       }
-    };
-};
-
-// Event listener for fetching verse and explanation
+        
+   // Event listener for fetching verse and explanation
 document.getElementById("fetch-verse").addEventListener("click", function() {
   const verseInput = document.getElementById("verse-input").value.trim();
   const outputDiv = document.getElementById("verse-output");
